@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>신장률 계산기 - Workkit</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📈 신장률 계산기</h1>
+    <p>작년 수치와 올해 수치를 입력하세요.</p>
+    <input id="last" placeholder="작년 수치" type="number">
+    <input id="current" placeholder="올해 수치" type="number">
+    <button onclick="calc()">계산하기</button>
+    <div id="result"></div>
+    <br>
+    <a href="../index.html">← 메인으로 돌아가기</a>
+  </div>
+  <script>
+    function calc() {
+      const last = parseFloat(document.getElementById("last").value);
+      const current = parseFloat(document.getElementById("current").value);
+      if (!last || !current) {
+        document.getElementById("result").innerText = "모두 입력해주세요.";
+        return;
+      }
+      const growth = ((current - last) / last) * 100;
+      document.getElementById("result").innerText = "신장률은 " + growth.toFixed(2) + "%입니다.";
+    }
+  </script>
+</body>
+</html>
