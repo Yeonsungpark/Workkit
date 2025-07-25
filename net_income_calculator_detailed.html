@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>실수령액 계산기 | Workkit</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; margin: 0; padding: 20px; }
+    .container { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    h2 { text-align: center; color: #333; }
+    .section { margin-top: 20px; }
+    label { font-weight: bold; display: block; margin-bottom: 6px; }
+    select, input, button { width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; margin-top: 6px; }
+    button { background: #007bff; color: white; font-weight: bold; margin-top: 20px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .result-box { background: #f1f3f5; padding: 20px; margin-top: 20px; border-radius: 8px; font-size: 16px; }
+    .explain, .tax-table { margin-top: 20px; font-size: 14px; color: #555; }
+    .tax-table table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    .tax-table th, .tax-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    .tax-table th { background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>실수령액 계산기</h2>
+
+    <div class="section">
+      <label for="type">입력 기준 선택</label>
+      <select id="type">
+        <option value="yearly">연봉 기준</option>
+        <option value="monthly">월급 기준</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <label for="amount">금액 입력</label>
+      <input type="text" id="amount" placeholder="숫자만 입력" />
+    </div>
+
+    <button onclick="calculate()">실수령액 계산</button>
+
+    <div id="result" class="result-box" style="display:none;">
+      <p id="monthlyNet"></p>
+      <p id="yearlyNet"></p>
+    </div>
+
+    <div class="explain">
+      <h4>실수령액이란?</h4>
+      <p>실수령액은 월급에서 국민연금, 건강보험, 고용보험, 장기요양보험, 소득세, 지방소득세 등을 제외한 실제 수령하는 금액입니다. 이 계산기는 평균적으로 세전 금액의 약 15%를 공제하는 간이 계산 결과를 제공합니다.</p>
+
+      <p><strong>예시:</strong><br/>
+      연봉 40,000,000원인 직장인이 있다고 가정하면,<br/>
+      - 월 급여는 약 3,333,333원<br/>
+      - 세금 및 4대보험 공제 약 500,000원<br/>
+      - <strong>실제 수령액은 약 2,830,000원</strong>입니다.<br/>
+      ※ 실제 금액은 부양가족 수, 비과세 소득, 지역 등에 따라 달라질 수 있습니다.
+      </p>
+    </div>
+
+    <div class="tax-table">
+      <h4>4대보험 및 세액 공제율 (예시)</h4>
+      <table>
+        <tr>
+          <th>항목</th>
+          <th>공제율 (근로자 부담)</th>
+        </tr>
+        <tr><td>국민연금</td><td>4.5%</td></tr>
+        <tr><td>건강보험</td><td>3.545%</td></tr>
+        <tr><td>장기요양보험</td><td>0.455%</td></tr>
+        <tr><td>고용보험</td><td>0.9%</td></tr>
+        <tr><td>소득세 + 지방세</td><td>약 5%~12%</td></tr>
+      </table>
+      <p>※ 위 수치는 예시이며, 실제 계산은 연봉, 세액공제, 부양가족 수, 연금/보험가입 여부에 따라 달라집니다.</p>
+    </div>
+  </div>
+
+  <script>
+    function numberWithCommas(x) {
+      return parseFloat(x).toLocaleString('ko-KR');
+    }
+
+    function calculate() {
+      let type = document.getElementById("type").value;
+      let raw = document.getElementById("amount").value.replace(/,/g, "");
+      let amount = parseFloat(raw);
+      if (isNaN(amount)) return;
+
+      let yearly = (type === "monthly") ? amount * 12 : amount;
+      let monthly = yearly / 12;
+
+      let monthlyDeducted = monthly * 0.85;
+      let yearlyDeducted = monthlyDeducted * 12;
+
+      document.getElementById("monthlyNet").innerText = "월 실수령액: " + numberWithCommas(monthlyDeducted.toFixed(0)) + "원";
+      document.getElementById("yearlyNet").innerText = "연 실수령액: " + numberWithCommas(yearlyDeducted.toFixed(0)) + "원";
+      document.getElementById("result").style.display = "block";
+    }
+
+    document.getElementById("amount").addEventListener("input", function(e) {
+      let value = e.target.value.replace(/,/g, '');
+      if (!isNaN(value) && value !== "") {
+        e.target.value = parseFloat(value).toLocaleString('ko-KR');
+      }
+    });
+
+    document.getElementById("amount").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") calculate();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>카드 수수료 계산기 | Workkit.kr</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 30px 20px;
+      color: #222;
+    }
+    .container {
+      max-width: 640px;
+      margin: auto;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 28px;
+      color: #666;
+    }
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: 600;
+    }
+    input[type="text"], input[readonly] {
+      width: 100%;
+      padding: 14px;
+      margin-top: 6px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+    input[readonly] {
+      background: #f7f7f7;
+      font-weight: bold;
+    }
+    .info-box {
+      margin-top: 36px;
+      background: #f9fbff;
+      border-left: 5px solid #2f80ed;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .info-box strong {
+      color: #1a237e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💳 카드 수수료 계산기</h1>
+    <p class="subtitle">자영업자와 프리랜서를 위한 간편 수수료 정산 도구</p>
+
+    <label for="amount">💰 카드 결제 금액 (원)</label>
+    <input type="text" id="amount" placeholder="예: 150,000">
+
+    <label for="fee">📌 카드 수수료율 (%) <span style="font-weight:normal">(※ 평균 약 2.2%)</span></label>
+    <input type="text" id="fee" placeholder="예: 2.3">
+
+    <label for="feeResult">📉 수수료 금액</label>
+    <input type="text" id="feeResult" readonly>
+
+    <label for="netAmount">📈 실제 수령 금액</label>
+    <input type="text" id="netAmount" readonly>
+
+    <div class="info-box">
+      <strong>📌 카드 수수료 계산이란?</strong><br>
+      고객이 카드로 결제한 금액 중 카드사에 지급해야 할 수수료를 미리 계산하여, <strong>실제로 내 계좌에 입금되는 금액</strong>을 확인하는 계산기입니다.<br><br>
+
+      <strong>예시)</strong><br>
+      A 사장님이 고객에게 150,000원을 카드로 결제받고, 수수료율이 2.3%라면,<br>
+      → 수수료는 3,450원<br>
+      → 실제 수령 금액은 146,550원이 됩니다.<br><br>
+
+      <strong>💡 Tip:</strong> 카드 수수료는 업종 및 매출에 따라 차등 적용되며, <u>소상공인 우대 수수료율</u>도 존재합니다. 평균 수수료율은 약 2.2%입니다.
+    </div>
+  </div>
+
+  <script>
+    function formatNumber(n) {
+      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function uncomma(str) {
+      return str.replace(/[^\d.-]/g, "");
+    }
+
+    const amountInput = document.getElementById('amount');
+    const feeInput = document.getElementById('fee');
+    const feeResult = document.getElementById('feeResult');
+    const netAmount = document.getElementById('netAmount');
+
+    function calculate() {
+      const rawAmount = uncomma(amountInput.value);
+      const rawFee = uncomma(feeInput.value);
+      const amount = parseFloat(rawAmount);
+      const fee = parseFloat(rawFee);
+
+      if (!isNaN(amount) && !isNaN(fee)) {
+        const feeValue = Math.floor(amount * (fee / 100));
+        const net = amount - feeValue;
+
+        feeResult.value = formatNumber(feeValue) + " 원";
+        netAmount.value = formatNumber(net) + " 원";
+      } else {
+        feeResult.value = "";
+        netAmount.value = "";
+      }
+    }
+
+    amountInput.addEventListener('input', (e) => {
+      const value = uncomma(e.target.value);
+      if (!isNaN(value) && value !== "") {
+        e.target.value = formatNumber(value);
+      } else {
+        e.target.value = "";
+      }
+      calculate();
+    });
+
+    feeInput.addEventListener('input', calculate);
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>손익분기점 분석 계산기 | Workkit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f2f4f8; margin: 0; padding: 20px; }
+    .container { max-width: 720px; margin: auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    h2 { text-align: center; margin-bottom: 20px; color: #222; }
+    .field { margin-bottom: 20px; }
+    label { font-weight: bold; display: block; margin-bottom: 8px; }
+    input { width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; }
+    button { width: 100%; background: #007bff; color: #fff; padding: 14px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    button:hover { background: #0056b3; }
+    .result { margin-top: 30px; background: #eef2f6; padding: 20px; border-radius: 10px; line-height: 1.6; }
+    .note { margin-top: 40px; font-size: 14px; color: #444; line-height: 1.8; }
+    .note h3 { margin-top: 30px; color: #111; }
+    .highlight { font-weight: bold; color: #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>손익분기점 분석 계산기</h2>
+
+    <div class="field">
+      <label for="price">상품 판매가 (₩)</label>
+      <input type="text" id="price" placeholder="예: 20000">
+    </div>
+
+    <div class="field">
+      <label for="cost">상품 1개당 원가(변동비)</label>
+      <input type="text" id="cost" placeholder="예: 8000">
+    </div>
+
+    <div class="field">
+      <label for="fixed">월 고정비</label>
+      <input type="text" id="fixed" placeholder="예: 1000000">
+    </div>
+
+    <div class="field">
+      <label for="volume">판매 수량</label>
+      <input type="text" id="volume" placeholder="예: 100">
+    </div>
+
+    <button onclick="calculate()">계산하기</button>
+
+    <div class="result" id="output" style="display:none">
+      <p id="breakeven"></p>
+      <p id="summary"></p>
+      <p id="profit"></p>
+    </div>
+
+    <div class="note">
+      <h3>📘 손익분기점 분석이란?</h3>
+      <p>손익분기점(BEP, Break Even Point)은 <strong>비용과 수익이 같아져서 이익도 손실도 없는 상태</strong>를 말합니다.</p>
+      <p>즉, 사업자가 <strong>최소 몇 개를 팔아야 손해를 보지 않는지</strong> 판단하는 데 유용합니다.</p>
+
+      <h3>📌 계산 공식</h3>
+      <ul>
+        <li>총매출 = 판매가 × 판매 수량</li>
+        <li>총변동비 = 원가 × 판매 수량</li>
+        <li>총비용 = 고정비 + 총변동비</li>
+        <li>순이익 = 총매출 - 총비용</li>
+        <li>손익분기점 수량 = 고정비 ÷ (판매가 - 원가)</li>
+      </ul>
+
+      <h3>💡 예시</h3>
+      <p>판매가 20,000원, 원가 8,000원, 고정비 1,000,000원, 수량 100개일 경우:</p>
+      <ul>
+        <li>총매출: 2,000,000원</li>
+        <li>총비용: 1,800,000원</li>
+        <li>순이익: 200,000원</li>
+        <li>손익분기점 수량: 약 84개</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function num(x){ return parseFloat(x.replace(/,/g, '')) || 0; }
+    function comma(x){ return x.toLocaleString('ko-KR'); }
+
+    function calculate(){
+      const price = num(document.getElementById('price').value);
+      const cost = num(document.getElementById('cost').value);
+      const fixed = num(document.getElementById('fixed').value);
+      const volume = num(document.getElementById('volume').value);
+
+      if(price <= cost || !price || !cost || !fixed || !volume){
+        alert("모든 값을 올바르게 입력해주세요. (판매가는 원가보다 커야 합니다)");
+        return;
+      }
+
+      const totalRevenue = price * volume;
+      const totalCost = fixed + (cost * volume);
+      const profit = totalRevenue - totalCost;
+      const breakevenQty = fixed / (price - cost);
+
+      document.getElementById("breakeven").innerHTML = "📊 손익분기점은 약 <span class='highlight'>" + Math.ceil(breakevenQty) + "개</span> 입니다.";
+      document.getElementById("summary").innerHTML = "💰 총매출: <span class='highlight'>" + comma(totalRevenue) + "원</span>, 총비용: <span class='highlight'>" + comma(totalCost) + "원</span>";
+      document.getElementById("profit").innerHTML = "📈 예상 순이익: <span class='highlight'>" + comma(profit) + "원</span> (" + (profit >= 0 ? "흑자" : "적자") + ")";
+      document.getElementById("output").style.display = "block";
+    }
+
+    document.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', e => {
+        let v = e.target.value.replace(/,/g, '');
+        if(v && !isNaN(v)) e.target.value = comma(parseFloat(v));
+      });
+      inp.addEventListener('keypress', e => {
+        if(e.key === 'Enter'){ e.preventDefault(); calculate(); }
+      });
+    });
+  </script>
+</body>
+</html>
