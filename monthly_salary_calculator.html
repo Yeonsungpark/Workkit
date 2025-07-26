@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>월급 계산기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Pretendard', sans-serif; background: #f7f9fc; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 500px; margin: auto; background: #fff; padding: 30px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+    h2 { text-align: center; color: #007bff; margin-bottom: 30px; }
+    label { display: block; margin: 15px 0 5px; font-weight: 600; }
+    input, select { width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ddd; border-radius: 8px; }
+    .desc { font-size: 13px; color: #777; margin-top: 4px; }
+    .checkboxes label { display: block; margin: 5px 0; font-weight: 400; }
+    button { width: 100%; margin-top: 25px; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    .result { background: #f1f8ff; margin-top: 30px; padding: 20px; border-radius: 10px; font-size: 15px; line-height: 1.6; }
+    .highlight { font-size: 18px; font-weight: bold; color: #007bff; }
+    .footer { font-size: 13px; color: #666; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📊 월급 계산기</h2>
+
+    <label>1️⃣ 연봉 (만원 단위)</label>
+    <input type="number" id="salary" placeholder="예: 3600">
+    <div class="desc">세전 연봉을 입력하세요. (예: 3600 → 3,600만원)</div>
+
+    <label>2️⃣ 부양가족 수</label>
+    <input type="number" id="family" placeholder="예: 1" value="1">
+    <div class="desc">본인을 제외한 인적공제 대상 가족 수입니다.</div>
+
+    <label>3️⃣ 퇴직금 포함 여부</label>
+    <select id="includeRetirement">
+      <option value="no" selected>미포함</option>
+      <option value="yes">포함</option>
+    </select>
+
+    <label>4️⃣ 4대보험 항목</label>
+    <div class="checkboxes">
+      <label><input type="checkbox" id="pension" checked> 국민연금 (4.5%)</label>
+      <label><input type="checkbox" id="health" checked> 건강보험 (3.545%)</label>
+      <label><input type="checkbox" id="longterm" checked> 장기요양보험 (0.455%)</label>
+      <label><input type="checkbox" id="unemployment" checked> 고용보험 (0.9%)</label>
+    </div>
+
+    <button onclick="calculate()">💵 실수령액 계산하기</button>
+
+    <div class="result" id="resultArea"></div>
+
+    <div class="footer">
+      <strong>📌 참고 (2025년 기준)</strong>
+      <ul>
+        <li>근로소득세율은 약식 계산으로 단일 6%로 가정</li>
+        <li>4대보험 요율
+          <ul>
+            <li>국민연금: 4.5%</li>
+            <li>건강보험: 3.545%</li>
+            <li>장기요양보험: 0.455%</li>
+            <li>고용보험: 0.9%</li>
+          </ul>
+        </li>
+        <li><strong>퇴직금</strong>은 연봉의 약 1/12에 해당하며, 통상 별도 지급됩니다.</li>
+        <li>정확한 금액은 홈택스 또는 4대보험 계산기를 참고하세요.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function calculate() {
+      const salary = parseInt(document.getElementById('salary').value) * 10000;
+      const family = parseInt(document.getElementById('family').value);
+      const includeRetirement = document.getElementById('includeRetirement').value;
+
+      if (!salary || salary <= 0) {
+        document.getElementById('resultArea').innerHTML = '<span style="color:red;">⚠ 연봉을 정확히 입력해주세요.</span>';
+        return;
+      }
+
+      const monthly = salary / 12;
+      let deduction = 0;
+
+      if (document.getElementById('pension').checked) deduction += salary * 0.045;
+      if (document.getElementById('health').checked) deduction += salary * 0.03545;
+      if (document.getElementById('longterm').checked) deduction += salary * 0.00455;
+      if (document.getElementById('unemployment').checked) deduction += salary * 0.009;
+
+      const tax = salary * 0.06; // 단일세율 가정
+      deduction += tax;
+
+      let retirementPay = 0;
+      if (includeRetirement === "yes") {
+        retirementPay = salary / 12;
+      }
+
+      const netAnnual = salary - deduction + retirementPay;
+      const netMonthly = netAnnual / 12;
+
+      document.getElementById('resultArea').innerHTML = `
+        ✅ <span class="highlight">월 실수령액: ${Math.round(netMonthly).toLocaleString()} 원</span><br>
+        💼 연 실수령액: ${Math.round(netAnnual).toLocaleString()} 원<br>
+        📉 총 공제액: ${Math.round(deduction).toLocaleString()} 원<br>
+        🪙 퇴직금 포함 금액: ${Math.round(retirementPay).toLocaleString()} 원
+      `;
+    }
+  </script>
+</body>
+</html>
