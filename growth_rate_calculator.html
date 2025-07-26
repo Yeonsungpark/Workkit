@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>신장률 계산기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: #f7f9fc;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 480px;
+            background: white;
+            padding: 25px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        h2 {
+            text-align: center;
+            color: #222;
+            font-size: 22px;
+        }
+        label {
+            font-weight: 600;
+            margin-top: 20px;
+            display: block;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 6px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .history {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .history-item {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .info {
+            margin-top: 40px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+        }
+        .info h4 {
+            margin-top: 0;
+        }
+        .formula {
+            background: #fff;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📈 신장률 계산기</h2>
+        <label>1️⃣ 기준값 (예: 전년도 실적)</label>
+        <input type="text" id="baseValue" placeholder="예: 1,000,000" oninput="formatNumber(this)" onkeypress="handleKeyPress(event)">
+
+        <label>2️⃣ 비교값 (예: 올해 실적)</label>
+        <input type="text" id="currentValue" placeholder="예: 1,200,000" oninput="formatNumber(this)" onkeypress="handleKeyPress(event)">
+
+        <button onclick="calculateGrowth()">신장률 계산하기</button>
+
+        <div class="result" id="resultArea"></div>
+
+        <div class="history" id="history"></div>
+
+        <div class="info">
+            <h4>📘 신장률이란?</h4>
+            신장률은 어떤 수치가 이전보다 얼마나 성장(또는 감소)했는지를 퍼센트(%)로 나타낸 지표입니다.<br><br>
+            예를 들어 작년 매출이 1,000만원이고 올해 매출이 1,200만원이라면,<br>
+            <strong style="color:#007bff;">신장률 = ((1,200만원 - 1,000만원) ÷ 1,000만원) × 100 = 20%</strong> 가 됩니다.<br><br>
+
+            <h4>📐 신장률 공식</h4>
+            <div class="formula">
+                신장률(%) = ((비교값 - 기준값) ÷ 기준값) × 100
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let historyList = [];
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                calculateGrowth();
+            }
+        }
+
+        function formatNumber(input) {
+            const value = input.value.replace(/[^\d]/g, '');
+            if (value === '') {
+                input.value = '';
+                return;
+            }
+            input.value = parseInt(value).toLocaleString();
+        }
+
+        function parseNumber(str) {
+            return parseFloat(str.replace(/,/g, ''));
+        }
+
+        function calculateGrowth() {
+            const base = parseNumber(document.getElementById('baseValue').value);
+            const current = parseNumber(document.getElementById('currentValue').value);
+            const resultArea = document.getElementById('resultArea');
+            const historyDiv = document.getElementById('history');
+
+            if (isNaN(base) || isNaN(current) || base === 0) {
+                resultArea.innerHTML = '<span style="color:red;">❗ 숫자를 모두 입력해주세요 (기준값은 0이 될 수 없습니다)</span>';
+                return;
+            }
+
+            const rate = ((current - base) / base * 100).toFixed(2);
+            const color = rate >= 0 ? 'green' : 'red';
+
+            resultArea.innerHTML = `📊 신장률은 <span style="color:${color};">${rate}%</span> 입니다.`;
+
+            const entry = `기준값: ${base.toLocaleString()} → 비교값: ${current.toLocaleString()} → 신장률: <strong style="color:${color};">${rate}%</strong>`;
+            historyList.unshift(entry);
+            if (historyList.length > 10) historyList.pop();
+            historyDiv.innerHTML = '<h4>📌 이전 계산 기록</h4>' + historyList.map(h => `<div class="history-item">${h}</div>`).join('');
+        }
+    </script>
+</body>
+</html>
