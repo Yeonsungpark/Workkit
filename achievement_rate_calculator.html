@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>달성률 계산기 (업그레이드)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      color: #222;
+      font-size: 22px;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 25px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .info {
+      margin-top: 40px;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+    }
+    .info h4 {
+      margin-top: 0;
+    }
+    .formula {
+      background: #fff;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: monospace;
+    }
+    .comparison {
+      margin-top: 20px;
+      background: #e9f7ef;
+      padding: 15px;
+      border-radius: 10px;
+      color: #155724;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎯 달성률 계산기</h2>
+    <label>1️⃣ 목표값</label>
+    <input type="text" id="target" placeholder="예: 3,000,000" oninput="formatInput(this)" onkeypress="handleKey(event)">
+
+    <label>2️⃣ 실적값</label>
+    <input type="text" id="actual" placeholder="예: 2,500,000" oninput="formatInput(this)" onkeypress="handleKey(event)">
+
+    <button onclick="calculate()">달성률 계산하기</button>
+
+    <div class="result" id="result"></div>
+    <div class="comparison" id="comparisonBox" style="display:none;"></div>
+
+    <div class="info">
+      <h4>📘 달성률이란?</h4>
+      목표 대비 실제 실적의 비율을 백분율(%)로 나타낸 수치입니다.<br><br>
+      예) 목표가 3,000만원, 실적이 2,400만원이면,<br>
+      <strong style="color:#007bff;">달성률 = (2,400 ÷ 3,000) × 100 = 80%</strong>
+      <h4>📐 공식</h4>
+      <div class="formula">
+        달성률(%) = (실적값 ÷ 목표값) × 100
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function formatInput(el) {
+      let val = el.value.replace(/[^0-9]/g, '');
+      el.value = val ? parseInt(val).toLocaleString() : '';
+    }
+
+    function handleKey(e) {
+      if (e.key === 'Enter') calculate();
+    }
+
+    function parseNumber(str) {
+      return parseFloat(str.replace(/,/g, ''));
+    }
+
+    function calculate() {
+      const target = parseNumber(document.getElementById('target').value);
+      const actual = parseNumber(document.getElementById('actual').value);
+      const resultEl = document.getElementById('result');
+      const compareEl = document.getElementById('comparisonBox');
+
+      if (!target || !actual || target === 0) {
+        resultEl.innerHTML = '<span style="color:red;">❗ 목표값과 실적값을 올바르게 입력해주세요.</span>';
+        compareEl.style.display = 'none';
+        return;
+      }
+
+      const rate = ((actual / target) * 100).toFixed(2);
+      const color = rate >= 100 ? 'green' : (rate >= 80 ? 'orange' : 'red');
+
+      resultEl.innerHTML = `✅ <span style="color:${color};">달성률: ${rate}%</span>`;
+      compareEl.style.display = 'block';
+
+      if (actual >= target) {
+        compareEl.innerHTML = `🎉 목표를 초과 달성했습니다! (+${(actual - target).toLocaleString()}원)`;
+      } else {
+        compareEl.innerHTML = `📉 목표까지 <strong>${(target - actual).toLocaleString()}원</strong> 남았습니다.`;
+      }
+    }
+  </script>
+</body>
+</html>
