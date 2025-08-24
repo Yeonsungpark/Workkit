@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>2025 종합소득세 계산기 | 워크킷</title>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3038090604417549"></script>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<style>
+    :root {
+      --main: #007bff;
+      --main-light: #e3f0ff;
+      --border: #e4e8f1;
+      --section-bg: #f6f9fc;
+      --input-bg: #f8fafc;
+      --gray: #666;
+    }
+    body { font-family: 'Pretendard', 'Segoe UI', sans-serif; background: var(--section-bg); margin: 0; padding: 0;}
+    .container {
+      max-width: 500px;
+      margin: 36px auto 22px auto;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 28px rgba(0,64,130,0.09);
+      padding: 34px 20px 26px 20px;
+      border: 1.5px solid var(--border);
+      min-width: 0;
+    }
+    h1 { text-align: center; font-size: 25px; color: var(--main); margin-bottom: 9px; font-weight:900;}
+    .desc {text-align:center; color:var(--gray); font-size:15px; margin-bottom: 25px; line-height:1.6;}
+    label { font-weight:600; display:block; margin-top:19px; font-size:16px; color: #1d3557;}
+    .input-group {margin-bottom:16px;}
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 15px;
+      margin-top: 6px;
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      font-size: 17px;
+      box-sizing: border-box;
+      background:var(--input-bg);
+      font-family:inherit;
+      color:#223;
+      transition: border 0.2s;
+    }
+    input:focus { outline: none; border: 1.5px solid var(--main);}
+    .input-desc {font-size:12.5px; color:#888; margin-top:4px; line-height:1.7;}
+    .subdesc {font-size:13px; color:#888; margin-bottom:6px; margin-left:2px;}
+    button {
+      width: 100%;
+      background: var(--main);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 16px;
+      margin-top: 28px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,123,255,0.07);
+      transition: background 0.2s;
+      letter-spacing:0.5px;
+    }
+    button:hover { background: #0056b3;}
+    .section-title {
+      margin-top: 34px;
+      margin-bottom: 10px;
+      color: var(--main);
+      font-size: 17px;
+      font-weight: 800;
+      border-left: 5px solid var(--main);
+      padding-left: 9px;
+      background: var(--main-light);
+      border-radius:7px 0 0 7px;
+    }
+    .result-box {
+      margin-top: 32px;
+      background: #f3f8ff;
+      padding: 26px 18px 19px 18px;
+      border-radius: 15px;
+      font-size: 17.5px;
+      color: #223;
+      word-break: keep-all;
+      box-shadow:0 1px 4px rgba(40,88,185,0.03);
+      border: 1.5px solid var(--border);
+      font-weight: 500;
+      line-height:1.8;
+    }
+    .result-box b { color: var(--main);}
+    .tip {
+      background: #f9fafd;
+      border-left: 6px solid var(--main);
+      padding: 15px 16px 13px 18px;
+      margin-top: 25px;
+      font-size: 14px;
+      border-radius: 10px;
+      color:#335;
+      line-height:1.7;
+      box-shadow:0 1px 8px rgba(0,123,255,0.05);
+      border: 1.2px solid var(--border);
+    }
+    .tax-table {
+      width: 100%;
+      margin-top: 15px;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: #fafbfc;
+      border-radius: 7px;
+      overflow: hidden;
+      box-shadow: 0 0.5px 2px rgba(0,123,255,0.05);
+    }
+    .tax-table th, .tax-table td {
+      border: 1px solid #e4e8f1;
+      padding: 9px;
+      text-align: center;
+    }
+    .tax-table th { background: var(--main-light); color:#007bff;}
+    .tax-table tr:last-child td { border-bottom: 1.5px solid var(--main);}
+    @media (max-width: 640px) {
+      .container {padding:15px 2vw 15px 2vw; border-radius:12px;}
+      h1 {font-size: 20.5px;}
+      .section-title {font-size: 14.5px;}
+      .result-box {font-size:15px;}
+      .tax-table th, .tax-table td {font-size:11px; padding: 5px;}
+      button {font-size:15px;}
+    }
+  
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+
+
+        .global-footer {
+          text-align: center;
+          padding: 32px 16px;
+          border-top: 1px solid #ddd;
+          font-size: 14px;
+          background-color: #f9f9f9;
+        }
+        .footer-links {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 12px 0;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 16px;
+          flex-direction: row;
+        }
+        .footer-links li {
+          margin: 0;
+        }
+        .footer-links a {
+          color: inherit;
+          text-decoration: none;
+        }
+        .footer-links a:hover {
+          text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+          .footer-links {
+            flex-direction: column;
+            gap: 8px;
+          }
+        }
+        </style>
+<style>
+  /* Responsive viewport */
+  @media(max-width:640px){
+    header.navbar nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header.navbar a {
+      margin: 0.5rem 0;
+    }
+  }
+  /* Basic header/footer styling */
+  header.navbar {
+    background: #007bff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  header.navbar .logo a {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+  header.navbar nav a {
+    color: #fff;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  footer.site-footer {
+    background: #f8f9fa;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  footer.site-footer a {
+    color: #007bff;
+    margin: 0 0.5rem;
+    text-decoration: none;
+  }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<link href="/favicon.ico" rel="icon"/>
+<style>
+  body { margin:0; font-family:sans-serif; }
+  header.navbar { background:#007bff; color:#fff; padding:1rem; display:flex; align-items:center; justify-content:space-between; }
+  header.navbar .logo a { color:#fff; text-decoration:none; font-size:1.5rem; }
+  header.navbar .menu-toggle { background:none; border:none; color:#fff; font-size:1.5rem; display:none; }
+  header.navbar .nav-menu { display:flex; gap:1rem; }
+  header.navbar .nav-menu a { color:#fff; text-decoration:none; }
+  @media(max-width:640px) {
+    header.navbar { flex-wrap:wrap; }
+    header.navbar .menu-toggle { display:block; }
+    header.navbar .nav-menu { display:none; flex-direction:column; width:100%; margin-top:0.5rem; }
+    header.navbar .nav-menu a { margin:0.5rem 0; }
+  }
+  .intro { background:#f0f8ff; padding:1rem; text-align:center; }
+  .intro p { margin:0.5rem 0; color:#333; }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* Ensure menu toggle visible on mobile */
+@media (max-width:640px) {
+  header.navbar .menu-toggle { display: block !important; }
+  header.navbar .nav-menu { display: none !important; flex-direction: column; width: 100%; }
+}
+/* Responsive form elements */
+form, input[type="text"], input[type="email"], input[type="number"], textarea, button {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+/* Container padding for readability */
+.container, main.container {
+  padding: 1rem !important;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+.breadcrumb { list-style: none; padding: 0.5rem 1rem; background: #e9ecef; border-radius: .25rem; display: flex; flex-wrap: wrap; margin: 0; }
+.breadcrumb li + li:before { content: "/"; padding: 0 0.5rem; color: #6c757d; }
+.breadcrumb a { text-decoration: none; color: #007bff; }
+.breadcrumb li { color: #6c757d; }
+.breadcrumb li:last-child { color: #495057; }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<meta content="2025년 기준 종합소득세를 간편 계산하세요. 과세표준, 누진세율, 공제 항목을 반영해 예상 세액을 산출하고 결과 해설·자주 묻는 질문까지 제공합니다." name="description"/>
+<link href="https://workkit.kr/business/income-tax-calculator/" rel="canonical"/>
+<style>
+  /* Form and calculator container */
+  form, .calculator { width:100%; max-width:480px; margin:0 auto; }
+  input, select, textarea, button { width:100%; box-sizing:border-box; }
+  /* Card padding and touch target */
+  .card { padding:1.5rem !important; }
+  button, .menu-toggle { padding:0.75rem 1rem !important; }
+  a { line-height:1.6 !important; }
+  /* Responsive nav-menu transition */
+  @media(max-width:640px){
+    .nav-menu { max-height:0; overflow:hidden; transition:max-height 0.2s ease-out; }
+    .nav-menu.open { max-height:500px; }
+  }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* Sliding mobile menu styles */
+header.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #007bff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+}
+header.navbar .logo a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+header.navbar .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+header.navbar .nav-menu {
+  display: flex;
+  gap: 1rem;
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+@media (max-width: 640px) {
+  header.navbar {
+    flex-wrap: wrap;
+  }
+  header.navbar .menu-toggle {
+    display: block;
+  }
+  header.navbar .nav-menu {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+  }
+  header.navbar .nav-menu.open {
+    max-height: 300px;
+  }
+  header.navbar .nav-menu a {
+    padding: 0.75rem 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+header.navbar .menu-toggle {
+  position: relative;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* v38: central container and improved UX/UI */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  color: #007bff;
+}
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 1rem 0;
+}
+.simple-list li {
+  margin-bottom: 1rem;
+}
+.simple-list a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.simple-list a:hover {
+  color: #007bff;
+}
+/* mobile adjustments v38 */
+@media (max-width: 640px) {
+  .container {
+    padding: 0.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  .simple-list a {
+    font-size: 1rem;
+  }
+}
+/* v39: calculator pages full width on mobile */
+@media (max-width: 640px) {
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+/* toggle CSS from v40 */
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+</style>
+<style>
+/* === Enhanced Responsive Layout for Workkit === */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #222;
+}
+header.navbar {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+}
+.navbar .nav-menu {
+  display: flex;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+}
+@media (max-width: 640px) {
+  .navbar .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .navbar .nav-menu.open {
+    display: flex !important;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+main.container {
+  max-width: 800px;
+  margin: 1rem auto;
+  background: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+footer.site-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background: #f0f0f0;
+  color: #666;
+}
+a {
+  color: #007bff;
+}
+a:hover {
+  text-decoration: underline;
+}
+</style>
+<meta content="2025 종합소득세 계산기 | 워크킷" property="og:title"/><meta content="2025 종합소득세 계산기 | 워크킷를 쉽고 빠르게 계산하세요. 워크킷 무료 온라인 계산기." property="og:description"/><meta content="https://workkit.kr/business/income-tax-calculator/" property="og:url"/><meta content="website" property="og:type"/><meta content="summary" name="twitter:card"/><meta content="2025 종합소득세 계산기 | 워크킷" name="twitter:title"/><meta content="2025 종합소득세 계산기 | 워크킷를 쉽고 빠르게 계산하세요. 워크킷 무료 온라인 계산기." name="twitter:description"/>
+<style>
+  .contact-cta{margin:48px 0;padding:24px;border:1px solid #eee;border-radius:12px}
+  .contact-cta h2{margin:0 0 8px}
+  .contact-cta .btn-contact{display:inline-block;margin-top:8px;text-decoration:underline}
+  .global-footer{margin-top:48px;padding:24px 0;border-top:1px solid #eee;font-size:14px;color:#444}
+  .global-footer .footer-links{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+  .global-footer .footer-links a{color:inherit;text-decoration:none}
+  .global-footer .footer-links a:hover{text-decoration:underline}
+</style>
+<style id="content-center">
+/* v54 중앙 콘텐츠 정렬 스타일 */
+.container, .wrapper, .main, .content {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 1024px) {
+  .container, .wrapper, .main, .content {
+    max-width: 960px;
+  }
+}
+</style><style>
+  /* iOS safe-area support: make header touch the camera/notch edge cleanly,
+     and give footer breathing room above the home indicator */
+  @supports(padding-top: env(safe-area-inset-top)) {
+    .navbar { padding-top: env(safe-area-inset-top); }
+    footer.global-footer, footer.site-footer { padding-bottom: env(safe-area-inset-bottom); }
+  }
+</style><style>
+  /* --- Mobile safe-area (iOS notch) extended handling --- */
+  /* 1) Ensure no default margins that create unintended gaps */
+  html, body { margin: 0; }
+
+  /* 2) Support both legacy iOS (constant()) and modern (env()) */
+  @supports(padding-top: env(safe-area-inset-top)) {
+    .navbar,
+    .intro,
+    .page-header,
+    .page-title,
+    .hero,
+    .title-banner {
+      padding-top: calc(env(safe-area-inset-top) + 8px);
+    }
+    footer.global-footer, footer.site-footer {
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+  }
+  @supports(padding-top: constant(safe-area-inset-top)) {
+    .navbar,
+    .intro,
+    .page-header,
+    .page-title,
+    .hero,
+    .title-banner {
+      padding-top: calc(constant(safe-area-inset-top) + 8px);
+    }
+    footer.global-footer, footer.site-footer {
+      padding-bottom: max(16px, constant(safe-area-inset-bottom));
+    }
+  }
+
+  /* 3) If the first main section has a negative overlap due to margins, normalize */
+  main, .container { margin-top: 0; }
+</style><style>
+  /* v51.2 override: remove hard-coded page paddings so the screen can hug the device edges */
+  html, body { margin: 0 !important; }
+  body { padding: 0 !important; }
+  @supports(padding-top: env(safe-area-inset-top)) {
+    body {
+      padding-top: env(safe-area-inset-top) !important;
+      padding-left: env(safe-area-inset-left) !important;
+      padding-right: env(safe-area-inset-right) !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+  }
+  @supports(padding-top: constant(safe-area-inset-top)) {
+    body {
+      padding-top: constant(safe-area-inset-top) !important;
+      padding-left: constant(safe-area-inset-left) !important;
+      padding-right: constant(safe-area-inset-right) !important;
+      padding-bottom: constant(safe-area-inset-bottom) !important;
+    }
+  }
+</style><meta content="#ffffff" name="theme-color"/><meta content="telephone=no" name="format-detection"/><style>
+/* Workkit Light Theme — Single-header build */
+:root {
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --ink: #0a0a0a;
+  --muted: #667085;
+  --accent: #1f6fff;
+  --accent-ink: #ffffff;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.06);
+  --ring: 0 0 0 3px rgba(31,111,255,.28);
+  --line: #e5e7eb;
+  --tile: #f8fafc;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, "Apple SD Gothic Neo", Arial, "맑은 고딕", sans-serif; background:var(--bg); color:var(--ink); }
+a { color: var(--ink); text-decoration: none; }
+a:hover { opacity:.9; }
+.wk-header{ position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 2px 10px rgba(0,0,0,.04); -webkit-backdrop-filter:saturate(180%) blur(10px); backdrop-filter:saturate(180%) blur(10px); }
+.wk-nav{ max-width:1040px; margin:0 auto; padding:14px 18px; display:flex; align-items:center; gap:14px }
+.wk-brand{ font-weight:800; padding:8px 12px; border-radius:999px; background:linear-gradient(120deg,#1f6fff,#6aa6ff); color:#fff; box-shadow:var(--shadow) }
+.wk-spacer{ flex:1 }
+.wk-link{ font-size:14px; color:var(--muted) }
+.wk-link:hover{ color:#101828 }
+main{ max-width:1024px; margin:26px auto; padding:0 16px 40px }
+.h1{ font-size:clamp(26px,5vw,40px); font-weight:800; margin:10px 0 }
+.subtitle{ color:var(--muted); margin:0 0 14px }
+.card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow) }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px }
+.tile{ display:block; padding:16px; border-radius:12px; border:1px solid var(--line); background:var(--tile) }
+.tile h3{ margin:0 0 6px; font-size:18px; color:#101828 }
+.tile p{ margin:0; color:var(--muted); font-size:14px }
+.tabs{ display:flex; gap:8px; margin:8px 0 14px }
+.tab{ border:1px solid var(--line); background:#fff; color:#101828; padding:10px 12px; border-radius:999px; cursor:pointer; font-size:14px }
+.tab.is-active{ background:var(--accent); border-color:transparent; color:var(--accent-ink); font-weight:700 }
+.panel{ display:none }
+.panel.is-active{ display:block }
+label{ display:block; font-size:14px; color:var(--muted); margin-bottom:6px }
+input[type="text"], input[type="number"], select{ width:100%; padding:14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:#101828; outline:none }
+input[type="text"]:focus, input[type="number"]:focus, select:focus{ box-shadow:var(--ring); border-color:#98b6ff; background:#fff }
+.controls{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px }
+button{ padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:#101828; cursor:pointer }
+button.primary{ background:var(--accent); border-color:transparent; color:var(--accent-ink); font-weight:700 }
+button.ghost{ background:transparent }
+.result{ margin-top:16px; padding:16px; border-radius:12px; border:1px dashed var(--line); background:#fff }
+.result .big{ font-size:clamp(22px,4.3vw,30px); font-weight:800 }
+.muted{ color:var(--muted) }
+footer{ max-width:1024px; margin:36px auto 0; padding:0 16px 40px; color:var(--muted); font-size:13px }
+button, .tab{ min-height:44px; touch-action:manipulation; -webkit-tap-highlight-color:rgba(0,0,0,.08) }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
+</style><style id="wk-income-2024-lite">
+.result-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.result-row{display:flex;justify-content:space-between;border-bottom:1px dashed #e5e7eb;padding:6px 0}
+.result-row .k{color:#667085}
+.result-row .v{font-weight:700}
+.result-row:last-child{border-bottom:0}
+.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:#e8f0ff;color:#1f6fff;font-size:12px;font-weight:700}
+.small{font-size:12.5px;color:#667085}
+</style><style id="wk-ads-css">
+#wk-side-rail{display:none}
+@media (min-width:1200px){
+  #wk-side-rail{display:block;position:fixed;right:16px;top:120px;width:300px;z-index:3}
+}
+.wk-bottom-ad{max-width:1024px;margin:24px auto;padding:0 16px}
+</style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "2025년 세율이 반영되어 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "예, 과세표준 구간과 누진세율은 2025년 기준으로 적용됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "공제 항목은 어떻게 처리되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "기본적인 공제 항목을 반영하며, 상세 공제는 개인 상황에 따라 실제 신고 시 달라질 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "결과 값은 신고용으로 쓸 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "참고용 추정치이며, 실제 신고는 국세청 안내와 전문가 상담을 권장합니다."
+      }
+    }
+  ]
+}</script></head>
+<body><header class="wk-header">
+<nav class="wk-nav">
+<a class="wk-brand" href="/">Workkit</a>
+<a class="wk-link" href="/employee/">직장인용</a>
+<a class="wk-link" href="/business/">사장님용</a>
+<a class="wk-link" href="/parttimer/">알바용</a>
+<span class="wk-spacer"></span>
+</nav>
+</header>
+<div aria-hidden="true" id="wk-side-rail">
+<ins class="adsbygoogle" data-ad-client="ca-pub-3038090604417549" data-ad-slot="7135929929" style="display:block;width:300px;height:600px"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li><a aria-label="홈" href="/">홈</a></li>
+<li><a href="/business/">사장님용</a></li>
+<li>2025 종합소득세 계산기</li>
+</ol>
+</nav>
+<div class="container">
+<h1>2025 종합소득세 계산기</h1>
+<div class="desc">
+      사업소득·근로소득·투자소득 등 다양한 소득과<br/>
+      각종 공제 항목을 직접 입력해 예상 종합소득세를 계산할 수 있습니다.
+    </div>
+<form id="taxForm" onsubmit="event.preventDefault(); calculateTax();">
+<div class="section-title">① 소득 입력</div>
+<div class="input-group">
+<label>사업소득 <span class="subdesc">(사업자, 프리랜서 등)</span></label>
+<input autocomplete="off" id="bizIncome" inputmode="numeric" oninput="formatComma(this)" placeholder="예: 50,000,000" type="text"/>
+</div>
+<div class="input-group">
+<label>근로소득 <span class="subdesc">(직장인 급여, 4대보험 가입자)</span></label>
+<input autocomplete="off" id="salaryIncome" inputmode="numeric" oninput="formatComma(this)" placeholder="예: 28,000,000" type="text"/>
+</div>
+<div class="input-group">
+<label>투자소득 <span class="subdesc">(이자, 배당, 임대, 기타)</span></label>
+<input autocomplete="off" id="investIncome" inputmode="numeric" oninput="formatComma(this)" placeholder="예: 4,000,000" type="text"/>
+</div>
+<div class="section-title">② 필요경비</div>
+<div class="input-group">
+<label>필요경비 총액 <span style="font-size:12px; color:#888">(사업 관련 지출. 투자·근로 제외)</span></label>
+<input autocomplete="off" id="expense" inputmode="numeric" oninput="formatComma(this)" placeholder="예: 15,000,000" type="text"/>
+<div class="input-desc">
+          주요경비: 상품 구입비용, 임차료, 인건비<br/>
+          기타경비: 복리후생비, 차량유지비, 보험료, 소모품비, 지급수수료 등
+        </div>
+</div>
+<div class="section-title">③ 인적공제</div>
+<div class="input-group">
+<label>본인 포함 총 가족수(명)</label>
+<input autocomplete="off" id="family" inputmode="numeric" min="1" placeholder="예: 3" type="number"/>
+<div class="input-desc">
+          본인포함 1인당 150만원 공제<br/>
+          경로우대 인당 100만원 추가, 장애인 인당 200만원 추가<br/>
+          부녀자공제 50만원, 한부모공제 100만원 추가(중복X)
+        </div>
+</div>
+<div class="section-title">④ 추가 공제</div>
+<div class="input-group">
+<label>연금저축(연간 납입 금액)</label>
+<input autocomplete="off" id="pension" inputmode="numeric" oninput="formatComma(this)" placeholder="예: 3,000,000" type="text"/>
+</div>
+<div class="input-group">
+<label>기타 공제(국민연금, 건강보험 등 본인 부담액)</label>
+<input autocomplete="off" id="otherDeduct" inputmode="numeric" oninput="formatComma(this)" placeholder="예: 2,400,000" type="text"/>
+</div>
+<button type="submit">종합소득세 계산하기</button>
+</form>
+<div class="result-box" id="result" style="display:none"></div><div class="small" id="wk-2024-note">2024 귀속 기준: 과세표준 구간 1,400·5,000·8,800·1.5억·3억·5억·10억 / 연금계좌 세액공제 12%(총급여 5,500만원 이하 15%)·연금저축 한도 600만원 / 근로소득공제 한도 2,000만원.</div>
+<div class="section-title" style="margin-top:36px;">종합소득세율표(2025년)</div>
+<table class="tax-table" style="; max-width: 100%; height: auto;">
+<tr>
+<th>과세표준 구간(원)</th>
+<th>세율(%)</th>
+<th>누진공제(원)</th>
+</tr>
+<tr><td>1,200만 이하</td><td>6</td><td>0</td></tr>
+<tr><td>1,200만 ~ 4,600만</td><td>15</td><td>1,080,000</td></tr>
+<tr><td>4,600만 ~ 8,800만</td><td>24</td><td>5,220,000</td></tr>
+<tr><td>8,800만 ~ 1억5천만원</td><td>35</td><td>14,900,000</td></tr>
+<tr><td>1억5천만 ~ 3억원</td><td>38</td><td>19,400,000</td></tr>
+<tr><td>3억 ~ 5억원</td><td>40</td><td>25,400,000</td></tr>
+<tr><td>5억 ~ 10억원</td><td>42</td><td>35,400,000</td></tr>
+<tr><td>10억원 초과</td><td>45</td><td>65,400,000</td></tr>
+</table>
+<div class="tip">
+<b>종합소득세란?</b><br/>
+      개인이 1년간 얻은 모든 소득(사업, 근로, 이자, 배당, 임대 등)에 부과되는 세금입니다. 각종 공제와 필요경비, 세액감면 등을 고려해 실질 세금을 계산할 수 있습니다.<br/><br/>
+<b>계산 TIP</b><br/>
+      - 실제 신고 시에는 추가 공제(교육비·의료비·기부금 등)도 많으니 참고용으로만 활용하세요.<br/>
+      - 인적공제: 기본 1,500,000원(1인), 경로우대 1,000,000원, 장애인 2,000,000원, 부녀자 500,000원, 한부모 1,000,000원 등<br/>
+      - 2025년 종합소득세율은 과세표준 구간별 누진세 방식입니다.<br/>
+      - 공제 항목과 신고요령은 국세청 홈택스(손택스)에서 확인 가능<br/><br/>
+<b>※ 본 계산기는 참고용 예측 도구입니다.</b>
+</div>
+</div>
+<div class="wk-bottom-ad">
+<ins class="adsbygoogle" data-ad-client="ca-pub-3038090604417549" data-ad-format="auto" data-ad-slot="4262354572" data-full-width-responsive="true" style="display:block"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<footer class="global-footer" role="contentinfo">
+<nav aria-label="하단 내비게이션">
+<ul class="footer-links">
+<li><a aria-label="홈" href="/">홈</a></li>
+<li><a href="/employee/">직장인용</a></li>
+<li><a href="/business/">사장님용</a></li>
+<li><a href="/parttimer/">알바용</a></li>
+<li><a href="/contact.html">문의하기</a></li>
+<li><a href="/privacy.html">개인정보 처리방침</a></li>
+<li><a href="/terms.html">이용약관</a></li>
+</ul>
+</nav>
+<small>© Workkit. All rights reserved.</small>
+</footer>
+<script id="wk-income-2024-core">
+(function(){
+  // ===== Utilities =====
+  var nf = new Intl.NumberFormat('ko-KR');
+  function fmt(n){ try{return nf.format(Math.round(n));}catch(_){return n;} }
+  function uncomma(v){ return (v||'').toString().replace(/,/g,'').trim(); }
+  function toInt(v){ var s=uncomma(v).replace(/[^\d-]/g,''); var n=parseInt(s||'0',10); return Number.isFinite(n)?n:0; }
+  function clamp(n, lo){ return (typeof lo==='number' && n<lo)?lo:n; }
+
+  // 천단위 콤마 표시
+  window.formatComma = function(el){
+    if(!el) return;
+    var raw = uncomma(el.value).replace(/[^\d-]/g,'');
+    if(raw===''||raw==='-'){ el.value=raw; return; }
+    el.value = fmt(parseInt(raw,10)||0);
+  };
+
+  // ===== 2024 세율표 (국세청) =====
+  // 과세표준 구간 및 누진공제
+  var BRACKETS = [
+    {limit: 14000000, rate: 0.06, quick:      0},
+    {limit: 50000000, rate: 0.15, quick: 1260000},
+    {limit: 88000000, rate: 0.24, quick: 5760000},
+    {limit:150000000, rate: 0.35, quick:15440000},
+    {limit:300000000, rate: 0.38, quick:19940000},
+    {limit:500000000, rate: 0.40, quick:25940000},
+    {limit:1000000000,rate: 0.42, quick:35940000},
+    {limit: Infinity, rate: 0.45, quick:65940000}
+  ];
+
+  function incomeTaxByTable(taxable){
+    // 산출세액 = 과세표준×세율 − 누진공제
+    var b = BRACKETS.find(function(x){ return taxable <= x.limit; });
+    if(!b) return 0;
+    return Math.max(0, Math.round(taxable * b.rate - b.quick));
+  }
+
+  // 근로소득공제 (소득세법 §47, 공제한도 2,000만원)
+  function earnedIncomeDeduction(totalSalary){
+    var s = totalSalary;
+    if(s<=0) return 0;
+    var d=0;
+    if (s <= 5000000) d = s * 0.70;
+    else if (s <= 15000000) d = 3500000 + (s - 5000000) * 0.40;
+    else if (s <= 45000000) d = 7500000 + (s - 15000000) * 0.15;
+    else if (s <= 100000000) d = 12000000 + (s - 45000000) * 0.05;
+    else d = 14750000 + (s - 100000000) * 0.02;
+    if (d > 20000000) d = 20000000;
+    // 총급여 미만 공제 규정
+    if (d > s) d = s;
+    return Math.floor(d);
+  }
+
+  // 연금저축 세액공제 (연금계좌): 12% (총급여 5,500만원 이하 15%), 연금저축 한도 600만원
+  function pensionTaxCredit(pensionPay, totalSalary){
+    var cap = 6000000; // 연금저축 입력만 받는 구조
+    var base = Math.max(0, Math.min(cap, pensionPay||0));
+    var rate = (totalSalary>0 && totalSalary<=55000000) ? 0.15 : 0.12;
+    return Math.round(base * rate);
+  }
+
+  window.calculateTax = function(){
+    var biz = toInt(document.getElementById('bizIncome') && document.getElementById('bizIncome').value);
+    var sal = toInt(document.getElementById('salaryIncome') && document.getElementById('salaryIncome').value); // 총급여
+    var inv = toInt(document.getElementById('investIncome') && document.getElementById('investIncome').value);
+    var exp = toInt(document.getElementById('expense') && document.getElementById('expense').value);
+    var fam = toInt(document.getElementById('family') && document.getElementById('family').value);
+    var pen = toInt(document.getElementById('pension') && document.getElementById('pension').value);
+    var oth = toInt(document.getElementById('otherDeduct') && document.getElementById('otherDeduct').value);
+
+    fam = fam>0 ? fam : 1;
+    biz = clamp(biz, 0); sal = clamp(sal, 0); inv = clamp(inv, 0); exp = clamp(exp, 0);
+    pen = clamp(pen, 0); oth = clamp(oth, 0);
+
+    // 1) 소득금액 산정
+    var businessIncomeAmount = Math.max(0, biz - exp);  // 필요경비 차감
+    var earnedDeduct = earnedIncomeDeduction(sal);
+    var earnedIncomeAmount = Math.max(0, sal - earnedDeduct);
+    var totalIncomeAmount = businessIncomeAmount + earnedIncomeAmount + inv;
+
+    // 2) 종합소득공제
+    var basicPersonal = fam * 1500000; // 기본공제 (요건 가정)
+    var totalDeduction = basicPersonal + oth; // 기타 소득공제 포함
+
+    // 3) 과세표준
+    var taxable = Math.max(0, totalIncomeAmount - totalDeduction);
+
+    // 4) 산출세액(국세)
+    var natTaxComputed = incomeTaxByTable(taxable);
+
+    // 5) 세액공제(연금계좌만 반영)
+    var taxCredit = pensionTaxCredit(pen, sal);
+    var natTaxAfterCredit = Math.max(0, natTaxComputed - taxCredit);
+
+    // 6) 지방소득세(산출세액의 10% 상당)
+    var localTax = Math.round(natTaxComputed * 0.10);
+
+    var totalPay = natTaxAfterCredit + localTax;
+
+    var $res = document.getElementById('result');
+    if($res){
+      var html='';
+      html+='<div class="badge">2024 기준 결과</div>';
+      html+='<div class="result-grid">';
+      html+='<div class="result-row"><span class="k">사업소득금액(수입-필요경비)</span><span class="v">'+fmt(businessIncomeAmount)+'원</span></div>';
+      html+='<div class="result-row"><span class="k">근로소득금액(총급여-'+fmt(earnedDeduct)+' 공제)</span><span class="v">'+fmt(earnedIncomeAmount)+'원</span></div>';
+      html+='<div class="result-row"><span class="k">투자소득금액</span><span class="v">'+fmt(inv)+'원</span></div>';
+      html+='<div class="result-row"><span class="k"><b>총소득금액 합계</b></span><span class="v"><b>'+fmt(totalIncomeAmount)+'원</b></span></div>';
+      html+='<div class="result-row"><span class="k">종합소득공제(기본 '+fmt(basicPersonal)+' + 기타 '+fmt(oth)+')</span><span class="v">-'+fmt(totalDeduction)+'원</span></div>';
+      html+='<div class="result-row"><span class="k"><b>과세표준</b></span><span class="v"><b>'+fmt(taxable)+'원</b></span></div>';
+      html+='<div class="result-row"><span class="k">국세 산출세액(누진공제 반영)</span><span class="v">'+fmt(natTaxComputed)+'원</span></div>';
+      html+='<div class="result-row"><span class="k">세액공제(연금계좌)</span><span class="v">-'+fmt(taxCredit)+'원</span></div>';
+      html+='<div class="result-row"><span class="k"><b>종합소득세(국세, 결정)</b></span><span class="v"><b>'+fmt(natTaxAfterCredit)+'원</b></span></div>';
+      html+='<div class="result-row"><span class="k">지방소득세(산출세액 10%)</span><span class="v">'+fmt(localTax)+'원</span></div>';
+      html+='<div class="result-row"><span class="k"><b>총 납부세금</b></span><span class="v"><b>'+fmt(totalPay)+'원</b></span></div>';
+      html+='</div>';
+      html+='<div class="small" style="margin-top:8px">※ 간소화: 자녀·보험료·의료비 등 기타 세액공제/감면은 미반영. 실제 신고 시 추가 공제 적용 가능.</div>';
+      $res.innerHTML = html;
+      $res.style.display='block';
+    }
+  };
+
+  // Enter anywhere triggers calc
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target && e.target.tagName || '').toLowerCase();
+    if(e.key==='Enter' && tag!=='textarea'){ e.preventDefault(); if(window.calculateTax) window.calculateTax(); }
+  }, true);
+
+  // Initialize commas on preset values
+  ['bizIncome','salaryIncome','investIncome','expense','pension','otherDeduct'].forEach(function(id){
+    var el = document.getElementById(id); if(!el) return;
+    if(el.value) el.value = fmt(toInt(el.value));
+  });
+})();
+</script></body>
+</html>

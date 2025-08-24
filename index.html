@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>워크킷 계산기</title>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3038090604417549"></script>
+<style>
+body{font-family:sans-serif;margin:0;padding:0;}
+header{background:#007bff;padding:1rem;}
+nav a{color:#fff;text-decoration:none;margin-right:1rem;}
+.category{padding:1rem;display:flex;flex-wrap:wrap;justify-content:center;}
+.card{display:block;border:1px solid #ddd;border-radius:8px;padding:1rem;margin:0.5rem;width:200px;text-align:center;text-decoration:none;color:#333;}
+.card:hover{box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+footer{text-align:center;padding:1rem;}
+
+.vertical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vertical-list li + li {
+  margin-top: 1rem;
+}
+.grid {
+  display: block;
+}
+
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.simple-list li {
+  margin-bottom: 0.75rem;
+}
+.simple-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.simple-list a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+
+
+        .global-footer {
+          text-align: center;
+          padding: 32px 16px;
+          border-top: 1px solid #ddd;
+          font-size: 14px;
+          background-color: #f9f9f9;
+        }
+        .footer-links {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 12px 0;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 16px;
+          flex-direction: row;
+        }
+        .footer-links li {
+          margin: 0;
+        }
+        .footer-links a {
+          color: inherit;
+          text-decoration: none;
+        }
+        .footer-links a:hover {
+          text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+          .footer-links {
+            flex-direction: column;
+            gap: 8px;
+          }
+        }
+        </style>
+<style>
+  /* Responsive viewport */
+  @media(max-width:640px){
+    header.navbar nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header.navbar a {
+      margin: 0.5rem 0;
+    }
+  }
+  /* Basic header/footer styling */
+  header.navbar {
+    background: #007bff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  header.navbar .logo a {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+  header.navbar nav a {
+    color: #fff;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  footer.site-footer {
+    background: #f8f9fa;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  footer.site-footer a {
+    color: #007bff;
+    margin: 0 0.5rem;
+    text-decoration: none;
+  }
+
+.vertical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vertical-list li + li {
+  margin-top: 1rem;
+}
+.grid {
+  display: block;
+}
+
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.simple-list li {
+  margin-bottom: 0.75rem;
+}
+.simple-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.simple-list a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<link href="/favicon.ico" rel="icon"/>
+<style>
+  body { margin:0; font-family:sans-serif; }
+  header.navbar { background:#007bff; color:#fff; padding:1rem; display:flex; align-items:center; justify-content:space-between; }
+  header.navbar .logo a { color:#fff; text-decoration:none; font-size:1.5rem; }
+  header.navbar .menu-toggle { background:none; border:none; color:#fff; font-size:1.5rem; display:none; }
+  header.navbar .nav-menu { display:flex; gap:1rem; }
+  header.navbar .nav-menu a { color:#fff; text-decoration:none; }
+  @media(max-width:640px) {
+    header.navbar { flex-wrap:wrap; }
+    header.navbar .menu-toggle { display:block; }
+    header.navbar .nav-menu { display:none; flex-direction:column; width:100%; margin-top:0.5rem; }
+    header.navbar .nav-menu a { margin:0.5rem 0; }
+  }
+  .intro { background:#f0f8ff; padding:1rem; text-align:center; }
+  .intro p { margin:0.5rem 0; color:#333; }
+
+.vertical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vertical-list li + li {
+  margin-top: 1rem;
+}
+.grid {
+  display: block;
+}
+
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.simple-list li {
+  margin-bottom: 0.75rem;
+}
+.simple-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.simple-list a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+  .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; text-align: center; text-decoration: none; color: #333; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+
+.vertical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vertical-list li + li {
+  margin-top: 1rem;
+}
+.grid {
+  display: block;
+}
+
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.simple-list li {
+  margin-bottom: 0.75rem;
+}
+.simple-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.simple-list a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* Ensure menu toggle visible on mobile */
+@media (max-width:640px) {
+  header.navbar .menu-toggle { display: block !important; }
+  header.navbar .nav-menu { display: none !important; flex-direction: column; width: 100%; }
+}
+/* Responsive form elements */
+form, input[type="text"], input[type="email"], input[type="number"], textarea, button {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+/* Container padding for readability */
+.container, main.container {
+  padding: 1rem !important;
+}
+
+.vertical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vertical-list li + li {
+  margin-top: 1rem;
+}
+.grid {
+  display: block;
+}
+
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.simple-list li {
+  margin-bottom: 0.75rem;
+}
+.simple-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.simple-list a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+.breadcrumb {
+  background: #f8f9fa;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.vertical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vertical-list li + li {
+  margin-top: 1rem;
+}
+.grid {
+  display: block;
+}
+
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.simple-list li {
+  margin-bottom: 0.75rem;
+}
+.simple-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.simple-list a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<meta content="워크킷 계산기 페이지입니다. 간단한 입력만으로 결과를 즉시 확인하고, 공식·예시·주의사항과 함께 이해를 돕는 설명을 제공합니다." name="description"/>
+<link href="https://workkit.kr/" rel="canonical"/>
+<style>
+  /* Form and calculator container */
+  form, .calculator { width:100%; max-width:480px; margin:0 auto; }
+  input, select, textarea, button { width:100%; box-sizing:border-box; }
+  /* Card padding and touch target */
+  .card { padding:1.5rem !important; }
+  button, .menu-toggle { padding:0.75rem 1rem !important; }
+  a { line-height:1.6 !important; }
+  /* Responsive nav-menu transition */
+  @media(max-width:640px){
+    .nav-menu { max-height:0; overflow:hidden; transition:max-height 0.2s ease-out; }
+    .nav-menu.open { max-height:500px; }
+  }
+
+.vertical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vertical-list li + li {
+  margin-top: 1rem;
+}
+.grid {
+  display: block;
+}
+
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.simple-list li {
+  margin-bottom: 0.75rem;
+}
+.simple-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.simple-list a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* Sliding mobile menu styles */
+header.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #007bff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+}
+header.navbar .logo a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+header.navbar .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+header.navbar .nav-menu {
+  display: flex;
+  gap: 1rem;
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+@media (max-width: 640px) {
+  header.navbar {
+    flex-wrap: wrap;
+  }
+  header.navbar .menu-toggle {
+    display: block;
+  }
+  header.navbar .nav-menu {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+  }
+  header.navbar .nav-menu.open {
+    max-height: 300px;
+  }
+  header.navbar .nav-menu a {
+    padding: 0.75rem 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+header.navbar .menu-toggle {
+  position: relative;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* v38: central container and improved UX/UI */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  color: #007bff;
+}
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 1rem 0;
+}
+.simple-list li {
+  margin-bottom: 1rem;
+}
+.simple-list a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.simple-list a:hover {
+  color: #007bff;
+}
+/* mobile adjustments v38 */
+@media (max-width: 640px) {
+  .container {
+    padding: 0.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  .simple-list a {
+    font-size: 1rem;
+  }
+}
+/* v39: calculator pages full width on mobile */
+@media (max-width: 640px) {
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+/* toggle CSS from v40 */
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+</style>
+<style>
+/* === Enhanced Responsive Layout for Workkit === */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #222;
+}
+header.navbar {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+}
+.navbar .nav-menu {
+  display: flex;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+}
+@media (max-width: 640px) {
+  .navbar .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .navbar .nav-menu.open {
+    display: flex !important;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+main.container {
+  max-width: 800px;
+  margin: 1rem auto;
+  background: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+footer.site-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background: #f0f0f0;
+  color: #666;
+}
+a {
+  color: #007bff;
+}
+a:hover {
+  text-decoration: underline;
+}
+</style>
+<meta content="워크킷 계산기" property="og:title"/><meta content="언제 어디서든 쉽고 빠르게 계산하세요. 워크킷 무료 온라인 계산기." property="og:description"/><meta content="https://workkit.kr/" property="og:url"/><meta content="website" property="og:type"/><meta content="summary" name="twitter:card"/><meta content="워크킷 계산기" name="twitter:title"/><meta content="워크킷 계산기를 쉽고 빠르게 계산하세요. 워크킷 무료 온라인 계산기." name="twitter:description"/>
+<style>
+  .contact-cta{margin:48px 0;padding:24px;border:1px solid #eee;border-radius:12px}
+  .contact-cta h2{margin:0 0 8px}
+  .contact-cta .btn-contact{display:inline-block;margin-top:8px;text-decoration:underline}
+  .global-footer{margin-top:48px;padding:24px 0;border-top:1px solid #eee;font-size:14px;color:#444}
+  .global-footer .footer-links{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+  .global-footer .footer-links a{color:inherit;text-decoration:none}
+  .global-footer .footer-links a:hover{text-decoration:underline}
+</style>
+<style id="content-center">
+/* v54 중앙 콘텐츠 정렬 스타일 */
+.container, .wrapper, .main, .content {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 1024px) {
+  .container, .wrapper, .main, .content {
+    max-width: 960px;
+  }
+}
+</style><style>
+  /* iOS safe-area support: make header touch the camera/notch edge cleanly,
+     and give footer breathing room above the home indicator */
+  @supports(padding-top: env(safe-area-inset-top)) {
+    .navbar { padding-top: env(safe-area-inset-top); }
+    footer.global-footer, footer.site-footer { padding-bottom: env(safe-area-inset-bottom); }
+  }
+</style><style>
+  /* --- Mobile safe-area (iOS notch) extended handling --- */
+  /* 1) Ensure no default margins that create unintended gaps */
+  html, body { margin: 0; }
+
+  /* 2) Support both legacy iOS (constant()) and modern (env()) */
+  @supports(padding-top: env(safe-area-inset-top)) {
+    .navbar,
+    .intro,
+    .page-header,
+    .page-title,
+    .hero,
+    .title-banner {
+      padding-top: calc(env(safe-area-inset-top) + 8px);
+    }
+    footer.global-footer, footer.site-footer {
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+  }
+  @supports(padding-top: constant(safe-area-inset-top)) {
+    .navbar,
+    .intro,
+    .page-header,
+    .page-title,
+    .hero,
+    .title-banner {
+      padding-top: calc(constant(safe-area-inset-top) + 8px);
+    }
+    footer.global-footer, footer.site-footer {
+      padding-bottom: max(16px, constant(safe-area-inset-bottom));
+    }
+  }
+
+  /* 3) If the first main section has a negative overlap due to margins, normalize */
+  main, .container { margin-top: 0; }
+</style><style>
+  /* v51.2 override: remove hard-coded page paddings so the screen can hug the device edges */
+  html, body { margin: 0 !important; }
+  body { padding: 0 !important; }
+  @supports(padding-top: env(safe-area-inset-top)) {
+    body {
+      padding-top: env(safe-area-inset-top) !important;
+      padding-left: env(safe-area-inset-left) !important;
+      padding-right: env(safe-area-inset-right) !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+  }
+  @supports(padding-top: constant(safe-area-inset-top)) {
+    body {
+      padding-top: constant(safe-area-inset-top) !important;
+      padding-left: constant(safe-area-inset-left) !important;
+      padding-right: constant(safe-area-inset-right) !important;
+      padding-bottom: constant(safe-area-inset-bottom) !important;
+    }
+  }
+</style><meta content="#ffffff" name="theme-color"/><meta content="telephone=no" name="format-detection"/><style>
+/* Workkit Light Theme — Single-header build */
+:root {
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --ink: #0a0a0a;
+  --muted: #667085;
+  --accent: #1f6fff;
+  --accent-ink: #ffffff;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.06);
+  --ring: 0 0 0 3px rgba(31,111,255,.28);
+  --line: #e5e7eb;
+  --tile: #f8fafc;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, "Apple SD Gothic Neo", Arial, "맑은 고딕", sans-serif; background:var(--bg); color:var(--ink); }
+a { color: var(--ink); text-decoration: none; }
+a:hover { opacity:.9; }
+.wk-header{ position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 2px 10px rgba(0,0,0,.04); -webkit-backdrop-filter:saturate(180%) blur(10px); backdrop-filter:saturate(180%) blur(10px); }
+.wk-nav{ max-width:1040px; margin:0 auto; padding:14px 18px; display:flex; align-items:center; gap:14px }
+.wk-brand{ font-weight:800; padding:8px 12px; border-radius:999px; background:linear-gradient(120deg,#1f6fff,#6aa6ff); color:#fff; box-shadow:var(--shadow) }
+.wk-spacer{ flex:1 }
+.wk-link{ font-size:14px; color:var(--muted) }
+.wk-link:hover{ color:#101828 }
+main{ max-width:1024px; margin:26px auto; padding:0 16px 40px }
+.h1{ font-size:clamp(26px,5vw,40px); font-weight:800; margin:10px 0 }
+.subtitle{ color:var(--muted); margin:0 0 14px }
+.card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow) }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px }
+.tile{ display:block; padding:16px; border-radius:12px; border:1px solid var(--line); background:var(--tile) }
+.tile h3{ margin:0 0 6px; font-size:18px; color:#101828 }
+.tile p{ margin:0; color:var(--muted); font-size:14px }
+.tabs{ display:flex; gap:8px; margin:8px 0 14px }
+.tab{ border:1px solid var(--line); background:#fff; color:#101828; padding:10px 12px; border-radius:999px; cursor:pointer; font-size:14px }
+.tab.is-active{ background:var(--accent); border-color:transparent; color:var(--accent-ink); font-weight:700 }
+.panel{ display:none }
+.panel.is-active{ display:block }
+label{ display:block; font-size:14px; color:var(--muted); margin-bottom:6px }
+input[type="text"], input[type="number"], select{ width:100%; padding:14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:#101828; outline:none }
+input[type="text"]:focus, input[type="number"]:focus, select:focus{ box-shadow:var(--ring); border-color:#98b6ff; background:#fff }
+.controls{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px }
+button{ padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:#101828; cursor:pointer }
+button.primary{ background:var(--accent); border-color:transparent; color:var(--accent-ink); font-weight:700 }
+button.ghost{ background:transparent }
+.result{ margin-top:16px; padding:16px; border-radius:12px; border:1px dashed var(--line); background:#fff }
+.result .big{ font-size:clamp(22px,4.3vw,30px); font-weight:800 }
+.muted{ color:var(--muted) }
+footer{ max-width:1024px; margin:36px auto 0; padding:0 16px 40px; color:var(--muted); font-size:13px }
+button, .tab{ min-height:44px; touch-action:manipulation; -webkit-tap-highlight-color:rgba(0,0,0,.08) }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
+</style><style id="wk-header-normalize">
+/* === Workkit Header Normalize (main only) === */
+/* Neutralize legacy generic header/nav rules affecting our wk-header */
+header.wk-header {
+  background: #fff !important;
+  padding: 0 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04) !important;
+  text-align: left !important;
+}
+header.wk-header .wk-nav {
+  max-width: 1040px !important;
+  margin: 0 auto !important;
+  padding: 14px 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  justify-content: flex-start !important;
+}
+header.wk-header .wk-nav .wk-link,
+header.wk-header .wk-nav .wk-brand {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+/* Make sure no center-align leaks into our brand/links on small screens */
+@media (max-width: 640px) {
+  header.wk-header .wk-nav { padding: 12px 14px !important; }
+}
+</style><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "이 계산기의 결과는 신뢰할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "공식과 일반적인 규칙을 바탕으로 계산하지만, 결과는 참고용이며 실제 적용은 상황에 따라 달라질 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "소수점 처리 방식은 무엇인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "표시 편의를 위해 반올림 기준으로 자릿수를 제한합니다. 계산 로직은 페이지에 안내된 공식에 따릅니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "입력값에 쉼표(,)를 넣어도 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "넣어도 되며, 계산 시 자동으로 숫자만 추출해 처리합니다."
+      }
+    }
+  ]
+}</script></head>
+<body><header class="wk-header">
+<nav class="wk-nav">
+<a class="wk-brand" href="/">Workkit</a>
+<a class="wk-link" href="/employee/">직장인용</a>
+<a class="wk-link" href="/business/">사장님용</a>
+<a class="wk-link" href="/parttimer/">알바용</a>
+<span class="wk-spacer"></span>
+</nav>
+</header>
+<div class="intro"><p>워크킷은 직장인, 사장님, 알바생을 위한 다양한 무료 온라인 계산기를 제공합니다.</p></div>
+<main class="container">
+<section>
+<h2>직장인 계산기</h2>
+<ul class="simple-list">
+<li><a href="/employee/monthly-salary-calculator/">월급 계산기</a></li>
+<li><a href="/employee/net-income-calculator/">실수령액 계산기</a></li>
+<li><a href="/employee/retirement-pay-calculator/">퇴직금 계산기</a></li>
+<li><a href="/employee/growth-rate-calculator/">신장률 계산기</a></li>
+<li><a href="/employee/difference-rate-calculator/">증감률 계산기</a></li>
+<li><a href="/employee/achievement-rate-calculator/">달성률 계산기</a></li>
+</ul>
+</section>
+<section>
+<h2>사장님 계산기</h2>
+<ul class="simple-list">
+<li><a href="/business/vat-calculator/">부가세 계산기</a></li>
+<li><a href="/business/breakeven-analysis/">손익분기점 계산기</a></li>
+<li><a href="/business/card-fee-calculator/">카드 수수료 계산기</a></li>
+<li><a href="/business/income-tax-calculator/">종합소득세 계산기</a></li>
+<li><a href="/business/loan-interest-calculator/">대출 이자 계산기</a></li>
+</ul>
+</section>
+<section>
+<h2>아르바이트 계산기</h2>
+<ul class="simple-list">
+<li><a href="/parttimer/part-timer-salary/">알바 월급 계산기</a></li>
+<li><a href="/parttimer/weekly-allowance-calculator/">주휴수당 계산기</a></li>
+<li><a href="/parttimer/unemployment-benefit-calculator/">실업급여 계산기</a></li>
+</ul>
+</section>
+</main>
+<footer class="global-footer" role="contentinfo">
+<nav aria-label="하단 내비게이션">
+<ul class="footer-links">
+<li><a aria-label="홈" href="/">홈</a></li>
+<li><a href="/employee/">직장인용</a></li>
+<li><a href="/business/">사장님용</a></li>
+<li><a href="/parttimer/">알바용</a></li>
+<li><a href="/contact.html">문의하기</a></li>
+<li><a href="/privacy.html">개인정보 처리방침</a></li>
+<li><a href="/terms.html">이용약관</a></li>
+</ul>
+</nav>
+<small>© Workkit. All rights reserved.</small>
+</footer>
+</body>
+</html>

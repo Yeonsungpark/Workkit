@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>2025 손익분기점 계산기 | 워크킷</title>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3038090604417549"></script>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f2f4f8; margin: 0; padding: 20px; }
+    .container { max-width: 720px; margin: auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    h2 { text-align: center; margin-bottom: 20px; color: #222; }
+    .field { margin-bottom: 20px; }
+    label { font-weight: bold; display: block; margin-bottom: 8px; }
+    input { width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; }
+    button { width: 100%; background: #007bff; color: #fff; padding: 14px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    button:hover { background: #0056b3; }
+    .result { margin-top: 30px; background: #eef2f6; padding: 20px; border-radius: 10px; line-height: 1.6; }
+    .note { margin-top: 40px; font-size: 14px; color: #444; line-height: 1.8; }
+    .note h3 { margin-top: 30px; color: #111; }
+    .highlight { font-weight: bold; color: #007bff; }
+  
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+
+
+        .global-footer {
+          text-align: center;
+          padding: 32px 16px;
+          border-top: 1px solid #ddd;
+          font-size: 14px;
+          background-color: #f9f9f9;
+        }
+        .footer-links {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 12px 0;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 16px;
+          flex-direction: row;
+        }
+        .footer-links li {
+          margin: 0;
+        }
+        .footer-links a {
+          color: inherit;
+          text-decoration: none;
+        }
+        .footer-links a:hover {
+          text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+          .footer-links {
+            flex-direction: column;
+            gap: 8px;
+          }
+        }
+        </style>
+<style>
+  /* Responsive viewport */
+  @media(max-width:640px){
+    header.navbar nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header.navbar a {
+      margin: 0.5rem 0;
+    }
+  }
+  /* Basic header/footer styling */
+  header.navbar {
+    background: #007bff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  header.navbar .logo a {
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+  header.navbar nav a {
+    color: #fff;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  footer.site-footer {
+    background: #f8f9fa;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  footer.site-footer a {
+    color: #007bff;
+    margin: 0 0.5rem;
+    text-decoration: none;
+  }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<link href="/favicon.ico" rel="icon"/>
+<style>
+  body { margin:0; font-family:sans-serif; }
+  header.navbar { background:#007bff; color:#fff; padding:1rem; display:flex; align-items:center; justify-content:space-between; }
+  header.navbar .logo a { color:#fff; text-decoration:none; font-size:1.5rem; }
+  header.navbar .menu-toggle { background:none; border:none; color:#fff; font-size:1.5rem; display:none; }
+  header.navbar .nav-menu { display:flex; gap:1rem; }
+  header.navbar .nav-menu a { color:#fff; text-decoration:none; }
+  @media(max-width:640px) {
+    header.navbar { flex-wrap:wrap; }
+    header.navbar .menu-toggle { display:block; }
+    header.navbar .nav-menu { display:none; flex-direction:column; width:100%; margin-top:0.5rem; }
+    header.navbar .nav-menu a { margin:0.5rem 0; }
+  }
+  .intro { background:#f0f8ff; padding:1rem; text-align:center; }
+  .intro p { margin:0.5rem 0; color:#333; }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* Ensure menu toggle visible on mobile */
+@media (max-width:640px) {
+  header.navbar .menu-toggle { display: block !important; }
+  header.navbar .nav-menu { display: none !important; flex-direction: column; width: 100%; }
+}
+/* Responsive form elements */
+form, input[type="text"], input[type="email"], input[type="number"], textarea, button {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+/* Container padding for readability */
+.container, main.container {
+  padding: 1rem !important;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+.breadcrumb { list-style: none; padding: 0.5rem 1rem; background: #e9ecef; border-radius: .25rem; display: flex; flex-wrap: wrap; margin: 0; }
+.breadcrumb li + li:before { content: "/"; padding: 0 0.5rem; color: #6c757d; }
+.breadcrumb a { text-decoration: none; color: #007bff; }
+.breadcrumb li { color: #6c757d; }
+.breadcrumb li:last-child { color: #495057; }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<meta content="워크킷의 필수 계산기 모음입니다. 자주 사용하는 계산 도구를 한곳에서 빠르게 이용하고, 친절한 예시와 설명을 함께 확인하세요." name="description"/>
+<link href="https://workkit.kr/business/breakeven-analysis/" rel="canonical"/>
+<style>
+  /* Form and calculator container */
+  form, .calculator { width:100%; max-width:480px; margin:0 auto; }
+  input, select, textarea, button { width:100%; box-sizing:border-box; }
+  /* Card padding and touch target */
+  .card { padding:1.5rem !important; }
+  button, .menu-toggle { padding:0.75rem 1rem !important; }
+  a { line-height:1.6 !important; }
+  /* Responsive nav-menu transition */
+  @media(max-width:640px){
+    .nav-menu { max-height:0; overflow:hidden; transition:max-height 0.2s ease-out; }
+    .nav-menu.open { max-height:500px; }
+  }
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* Sliding mobile menu styles */
+header.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #007bff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+}
+header.navbar .logo a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+header.navbar .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+header.navbar .nav-menu {
+  display: flex;
+  gap: 1rem;
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+@media (max-width: 640px) {
+  header.navbar {
+    flex-wrap: wrap;
+  }
+  header.navbar .menu-toggle {
+    display: block;
+  }
+  header.navbar .nav-menu {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+  }
+  header.navbar .nav-menu.open {
+    max-height: 300px;
+  }
+  header.navbar .nav-menu a {
+    padding: 0.75rem 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+header.navbar .menu-toggle {
+  position: relative;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+</style>
+<style>
+/* v38: central container and improved UX/UI */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  color: #007bff;
+}
+.simple-list {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 1rem 0;
+}
+.simple-list li {
+  margin-bottom: 1rem;
+}
+.simple-list a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.simple-list a:hover {
+  color: #007bff;
+}
+/* mobile adjustments v38 */
+@media (max-width: 640px) {
+  .container {
+    padding: 0.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  .simple-list a {
+    font-size: 1rem;
+  }
+}
+/* v39: calculator pages full width on mobile */
+@media (max-width: 640px) {
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+}
+/* toggle CSS from v40 */
+@media (max-width: 640px) {
+  header.navbar .nav-menu {
+    display: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  header.navbar .nav-menu.open {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 500px !important;
+  }
+}
+</style>
+<style>
+/* === Enhanced Responsive Layout for Workkit === */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #222;
+}
+header.navbar {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .nav-menu a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+}
+.navbar .nav-menu {
+  display: flex;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+}
+@media (max-width: 640px) {
+  .navbar .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .navbar .nav-menu.open {
+    display: flex !important;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+main.container {
+  max-width: 800px;
+  margin: 1rem auto;
+  background: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+footer.site-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background: #f0f0f0;
+  color: #666;
+}
+a {
+  color: #007bff;
+}
+a:hover {
+  text-decoration: underline;
+}
+</style>
+<meta content="2025 손익분기점 계산기 | 워크킷" property="og:title"/><meta content="2025 손익분기점 계산기 | 워크킷를 쉽고 빠르게 계산하세요. 워크킷 무료 온라인 계산기." property="og:description"/><meta content="https://workkit.kr/business/breakeven-analysis/" property="og:url"/><meta content="website" property="og:type"/><meta content="summary" name="twitter:card"/><meta content="2025 손익분기점 계산기 | 워크킷" name="twitter:title"/><meta content="2025 손익분기점 계산기 | 워크킷를 쉽고 빠르게 계산하세요. 워크킷 무료 온라인 계산기." name="twitter:description"/>
+<style>
+  .contact-cta{margin:48px 0;padding:24px;border:1px solid #eee;border-radius:12px}
+  .contact-cta h2{margin:0 0 8px}
+  .contact-cta .btn-contact{display:inline-block;margin-top:8px;text-decoration:underline}
+  .global-footer{margin-top:48px;padding:24px 0;border-top:1px solid #eee;font-size:14px;color:#444}
+  .global-footer .footer-links{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+  .global-footer .footer-links a{color:inherit;text-decoration:none}
+  .global-footer .footer-links a:hover{text-decoration:underline}
+</style>
+<style id="content-center">
+/* v54 중앙 콘텐츠 정렬 스타일 */
+.container, .wrapper, .main, .content {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 1024px) {
+  .container, .wrapper, .main, .content {
+    max-width: 960px;
+  }
+}
+</style><style>
+  /* iOS safe-area support: make header touch the camera/notch edge cleanly,
+     and give footer breathing room above the home indicator */
+  @supports(padding-top: env(safe-area-inset-top)) {
+    .navbar { padding-top: env(safe-area-inset-top); }
+    footer.global-footer, footer.site-footer { padding-bottom: env(safe-area-inset-bottom); }
+  }
+</style><style>
+  /* --- Mobile safe-area (iOS notch) extended handling --- */
+  /* 1) Ensure no default margins that create unintended gaps */
+  html, body { margin: 0; }
+
+  /* 2) Support both legacy iOS (constant()) and modern (env()) */
+  @supports(padding-top: env(safe-area-inset-top)) {
+    .navbar,
+    .intro,
+    .page-header,
+    .page-title,
+    .hero,
+    .title-banner {
+      padding-top: calc(env(safe-area-inset-top) + 8px);
+    }
+    footer.global-footer, footer.site-footer {
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+  }
+  @supports(padding-top: constant(safe-area-inset-top)) {
+    .navbar,
+    .intro,
+    .page-header,
+    .page-title,
+    .hero,
+    .title-banner {
+      padding-top: calc(constant(safe-area-inset-top) + 8px);
+    }
+    footer.global-footer, footer.site-footer {
+      padding-bottom: max(16px, constant(safe-area-inset-bottom));
+    }
+  }
+
+  /* 3) If the first main section has a negative overlap due to margins, normalize */
+  main, .container { margin-top: 0; }
+</style><style>
+  /* v51.2 override: remove hard-coded page paddings so the screen can hug the device edges */
+  html, body { margin: 0 !important; }
+  body { padding: 0 !important; }
+  @supports(padding-top: env(safe-area-inset-top)) {
+    body {
+      padding-top: env(safe-area-inset-top) !important;
+      padding-left: env(safe-area-inset-left) !important;
+      padding-right: env(safe-area-inset-right) !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+  }
+  @supports(padding-top: constant(safe-area-inset-top)) {
+    body {
+      padding-top: constant(safe-area-inset-top) !important;
+      padding-left: constant(safe-area-inset-left) !important;
+      padding-right: constant(safe-area-inset-right) !important;
+      padding-bottom: constant(safe-area-inset-bottom) !important;
+    }
+  }
+</style><meta content="#ffffff" name="theme-color"/><meta content="telephone=no" name="format-detection"/><style>
+/* Workkit Light Theme — Single-header build */
+:root {
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --ink: #0a0a0a;
+  --muted: #667085;
+  --accent: #1f6fff;
+  --accent-ink: #ffffff;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.06);
+  --ring: 0 0 0 3px rgba(31,111,255,.28);
+  --line: #e5e7eb;
+  --tile: #f8fafc;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, "Apple SD Gothic Neo", Arial, "맑은 고딕", sans-serif; background:var(--bg); color:var(--ink); }
+a { color: var(--ink); text-decoration: none; }
+a:hover { opacity:.9; }
+.wk-header{ position:sticky; top:0; z-index:100; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 2px 10px rgba(0,0,0,.04); -webkit-backdrop-filter:saturate(180%) blur(10px); backdrop-filter:saturate(180%) blur(10px); }
+.wk-nav{ max-width:1040px; margin:0 auto; padding:14px 18px; display:flex; align-items:center; gap:14px }
+.wk-brand{ font-weight:800; padding:8px 12px; border-radius:999px; background:linear-gradient(120deg,#1f6fff,#6aa6ff); color:#fff; box-shadow:var(--shadow) }
+.wk-spacer{ flex:1 }
+.wk-link{ font-size:14px; color:var(--muted) }
+.wk-link:hover{ color:#101828 }
+main{ max-width:1024px; margin:26px auto; padding:0 16px 40px }
+.h1{ font-size:clamp(26px,5vw,40px); font-weight:800; margin:10px 0 }
+.subtitle{ color:var(--muted); margin:0 0 14px }
+.card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow) }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px }
+.tile{ display:block; padding:16px; border-radius:12px; border:1px solid var(--line); background:var(--tile) }
+.tile h3{ margin:0 0 6px; font-size:18px; color:#101828 }
+.tile p{ margin:0; color:var(--muted); font-size:14px }
+.tabs{ display:flex; gap:8px; margin:8px 0 14px }
+.tab{ border:1px solid var(--line); background:#fff; color:#101828; padding:10px 12px; border-radius:999px; cursor:pointer; font-size:14px }
+.tab.is-active{ background:var(--accent); border-color:transparent; color:var(--accent-ink); font-weight:700 }
+.panel{ display:none }
+.panel.is-active{ display:block }
+label{ display:block; font-size:14px; color:var(--muted); margin-bottom:6px }
+input[type="text"], input[type="number"], select{ width:100%; padding:14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:#101828; outline:none }
+input[type="text"]:focus, input[type="number"]:focus, select:focus{ box-shadow:var(--ring); border-color:#98b6ff; background:#fff }
+.controls{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px }
+button{ padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:#101828; cursor:pointer }
+button.primary{ background:var(--accent); border-color:transparent; color:var(--accent-ink); font-weight:700 }
+button.ghost{ background:transparent }
+.result{ margin-top:16px; padding:16px; border-radius:12px; border:1px dashed var(--line); background:#fff }
+.result .big{ font-size:clamp(22px,4.3vw,30px); font-weight:800 }
+.muted{ color:var(--muted) }
+footer{ max-width:1024px; margin:36px auto 0; padding:0 16px 40px; color:var(--muted); font-size:13px }
+button, .tab{ min-height:44px; touch-action:manipulation; -webkit-tap-highlight-color:rgba(0,0,0,.08) }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
+</style><style id="wk-lite-tabs-and-primary">
+/* === Workkit lite tabs + primary button === */
+.wk-tabs { display:flex; gap:8px; margin: 8px 0 14px; flex-wrap:wrap; }
+.wk-tab { display:inline-block; padding:10px 14px; border-radius:999px; border:1px solid #e5e7eb; background:#fff; color:#101828; text-decoration:none; font-size:14px; }
+.wk-tab.is-active, .wk-tab:hover { background:#1f6fff; color:#fff; border-color:#1f6fff; }
+button.primary { background:#1f6fff !important; color:#fff !important; border:none !important; border-radius:12px !important; padding:12px 16px !important; font-weight:700 !important; box-shadow:0 4px 12px rgba(31,111,255,.25) !important; }
+button.primary:active { transform: translateY(1px); }
+</style><style id="wk-ads-css">
+#wk-side-rail{display:none}
+@media (min-width:1200px){
+  #wk-side-rail{display:block;position:fixed;right:16px;top:120px;width:300px;z-index:3}
+}
+.wk-bottom-ad{max-width:1024px;margin:24px auto;padding:0 16px}
+</style>
+</head>
+<body><header class="wk-header">
+<nav class="wk-nav">
+<a class="wk-brand" href="/">Workkit</a>
+<a class="wk-link" href="/employee/">직장인용</a>
+<a class="wk-link" href="/business/">사장님용</a>
+<a class="wk-link" href="/parttimer/">알바용</a>
+<span class="wk-spacer"></span>
+</nav>
+</header>
+<div aria-hidden="true" id="wk-side-rail">
+<ins class="adsbygoogle" data-ad-client="ca-pub-3038090604417549" data-ad-slot="7135929929" style="display:block;width:300px;height:600px"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li><a aria-label="홈" href="/">홈</a></li>
+<li><a href="/business/">사장님용</a></li>
+<li>2025 손익분기점 계산기</li>
+</ol>
+</nav>
+<div class="container">
+<h2>손익분기점 분석 계산기</h2><div class="wk-tabs" id="wk-tabs"><a class="wk-tab is-active" href="#calc-section" id="tab-calc">계산기</a><a class="wk-tab" href="#guide-section" id="tab-guide">설명</a></div><section id="calc-section"><div class="field">
+<label for="price">상품 판매가 (₩)</label>
+<input autocomplete="off" id="price" inputmode="numeric" placeholder="예: 20,000" type="text"/>
+</div><div class="field">
+<label for="cost">상품 1개당 원가 (변동비)</label>
+<input autocomplete="off" id="cost" inputmode="numeric" placeholder="예: 8,000" type="text"/>
+</div><div class="field">
+<label for="fixed">월 고정비 (₩)</label>
+<input autocomplete="off" id="fixed" inputmode="numeric" placeholder="예: 1,000,000" type="text"/>
+</div><div class="field">
+<label for="volume">판매 수량 (개)</label>
+<input autocomplete="off" id="volume" inputmode="numeric" placeholder="예: 100" type="text"/>
+</div><button class="primary" onclick="calculate()" type="button">계산하기</button><div class="result" id="output" style="display:none">
+<p id="breakeven"></p>
+<p id="summary"></p>
+<p id="profit"></p>
+</div></section>
+<div class="note" id="guide-section">
+<h3>📘 손익분기점 분석이란?</h3>
+<p>손익분기점(BEP, Break Even Point)은 <strong>비용과 수익이 같아져서 이익도 손실도 없는 상태</strong>를 말합니다.</p>
+<p>즉, 사업자가 <strong>최소 몇 개를 팔아야 손해를 보지 않는지</strong> 판단하는 데 유용합니다.</p>
+<h3>📌 계산 공식</h3>
+<ul>
+<li>총매출 = 판매가 × 판매 수량</li>
+<li>총변동비 = 원가 × 판매 수량</li>
+<li>총비용 = 고정비 + 총변동비</li>
+<li>순이익 = 총매출 - 총비용</li>
+<li>손익분기점 수량 = 고정비 ÷ (판매가 - 원가)</li>
+</ul>
+<h3>💡 예시</h3>
+<p>판매가 20,000원, 원가 8,000원, 고정비 1,000,000원, 수량 100개일 경우:</p>
+<ul>
+<li>총매출: 2,000,000원</li>
+<li>총비용: 1,800,000원</li>
+<li>순이익: 200,000원</li>
+<li>손익분기점 수량: 약 84개</li>
+</ul>
+</div>
+</div>
+<div class="wk-bottom-ad">
+<ins class="adsbygoogle" data-ad-client="ca-pub-3038090604417549" data-ad-format="auto" data-ad-slot="4262354572" data-full-width-responsive="true" style="display:block"></ins>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<footer class="global-footer" role="contentinfo">
+<nav aria-label="하단 내비게이션">
+<ul class="footer-links">
+<li><a aria-label="홈" href="/">홈</a></li>
+<li><a href="/employee/">직장인용</a></li>
+<li><a href="/business/">사장님용</a></li>
+<li><a href="/parttimer/">알바용</a></li>
+<li><a href="/contact.html">문의하기</a></li>
+<li><a href="/privacy.html">개인정보 처리방침</a></li>
+<li><a href="/terms.html">이용약관</a></li>
+</ul>
+</nav>
+<small>© Workkit. All rights reserved.</small>
+</footer>
+<script id="wk-calc-core">
+(function(){
+  // number helpers
+  var nf = new Intl.NumberFormat('ko-KR');
+  function fmt(n){ try{return nf.format(n);}catch(_){return n;} }
+  function uncomma(v){ return (v||'').toString().replace(/,/g,'').trim(); }
+  function toNum(v){
+    var s = uncomma(v).replace(/[^\d.-]/g,'');
+    if ((s.match(/\./g)||[]).length>1) { s = s.replace(/\.(?=.*\.)/g,''); }
+    var n = Number(s); return Number.isFinite(n)?n:0;
+  }
+
+  var $price = document.getElementById('price');
+  var $cost  = document.getElementById('cost');
+  var $fixed = document.getElementById('fixed');
+  var $vol   = document.getElementById('volume');
+  var $out   = document.getElementById('output');
+  var $bre   = document.getElementById('breakeven');
+  var $sum   = document.getElementById('summary');
+  var $pro   = document.getElementById('profit');
+
+  function calculate(){
+    var price = toNum($price && $price.value);
+    var cost  = toNum($cost && $cost.value);
+    var fixed = toNum($fixed && $fixed.value);
+    var vol   = toNum($vol && $vol.value);
+
+    if(!(price>0) || cost<0 || fixed<0 || vol<0){
+      if($out) $out.style.display='block';
+      if($bre) $bre.textContent = '입력 오류: 판매가>0, 원가/고정비/수량은 0 이상이어야 합니다.';
+      if($sum) $sum.textContent = '현재 값 — 판매가: '+fmt(price)+'원, 원가: '+fmt(cost)+'원, 고정비: '+fmt(fixed)+'원, 수량: '+fmt(vol)+'개';
+      if($pro) $pro.textContent = '';
+      return;
+    }
+
+    var unitCM = price - cost;
+    var cmRate = price>0 ? (unitCM/price*100) : 0;
+
+    if(unitCM<=0){
+      var sales0 = vol * price;
+      var var0   = vol * cost;
+      var profit0= sales0 - (fixed + var0);
+
+      if($out) $out.style.display='block';
+      if($bre) $bre.textContent = '손익분기점 계산 불가: 판매가가 원가보다 커야 합니다.';
+      if($sum) $sum.textContent = '공헌이익(판매가-원가): '+fmt(unitCM)+'원 / 공헌이익률: '+cmRate.toLocaleString('ko-KR',{maximumFractionDigits:2})+'%';
+      if($pro) $pro.textContent = '현재 입력 수량 기준 순이익: '+(profit0>=0?'+':'')+fmt(profit0)+'원';
+      return;
+    }
+
+    var bepExact = fixed / unitCM;
+    var bepQty   = Math.ceil(bepExact);
+    var bepRevenue = bepQty * price;
+
+    var sales = vol * price;
+    var variable = vol * cost;
+    var totalCost = fixed + variable;
+    var profit = sales - totalCost;
+
+    if($out) $out.style.display='block';
+    if($bre) $bre.innerHTML = '손익분기점 수량: <span class="highlight">'+fmt(bepQty)+'개</span> (정확: '+bepExact.toLocaleString('ko-KR',{maximumFractionDigits:2})+'개) · 손익분기점 매출: <span class="highlight">'+fmt(bepRevenue)+'원</span>';
+    if($sum) $sum.textContent = '공헌이익(판매가-원가): '+fmt(unitCM)+'원 / 공헌이익률: '+cmRate.toLocaleString('ko-KR',{maximumFractionDigits:2})+'%';
+    if($pro) $pro.textContent = '현재 입력 수량 기준 순이익: '+(profit>=0?'+':'')+fmt(profit)+'원 (총매출 '+fmt(sales)+'원 − 총비용 '+fmt(totalCost)+'원)';
+  }
+  window.calculate = calculate;
+
+  // auto-commas + live calc
+  ['price','cost','fixed','volume'].forEach(function(id){
+    var el = document.getElementById(id); if(!el) return;
+    el.addEventListener('focus', function(){ el.value = uncomma(el.value); });
+    el.addEventListener('blur', function(){ var n = toNum(el.value); el.value = (n||n===0)?fmt(n):''; calculate(); });
+    el.addEventListener('input', function(){ calculate(); });
+  });
+
+  // Enter anywhere (except textarea)
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target && e.target.tagName || '').toLowerCase();
+    if (e.key === 'Enter' && tag !== 'textarea') { e.preventDefault(); calculate(); }
+  }, true);
+
+  // Ensure "계산하기" buttons trigger calculate
+  Array.prototype.forEach.call(document.querySelectorAll('button'), function(b){
+    if ((b.textContent||'').indexOf('계산')>-1) {
+      b.addEventListener('click', function(ev){ ev.preventDefault(); calculate(); });
+    }
+  });
+
+  // Initialize display
+  calculate();
+})();</script><script id="wk-tabs-activate">
+(function(){
+  function updateActive(){
+    var hash = location.hash || '#calc-section';
+    var aCalc = document.getElementById('tab-calc');
+    var aGuide = document.getElementById('tab-guide');
+    if(aCalc && aGuide){
+      aCalc.classList.toggle('is-active', hash==='#calc-section');
+      aGuide.classList.toggle('is-active', hash==='#guide-section');
+    }
+  }
+  window.addEventListener('hashchange', updateActive);
+  document.addEventListener('DOMContentLoaded', updateActive);
+  updateActive();
+})();</script></body>
+</html>
